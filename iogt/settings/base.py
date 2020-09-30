@@ -151,8 +151,9 @@ TEMPLATES = [
 
 
 import os, sh, sys
-git = sh.git.bake(_cwd=os.path.dirname(os.path.realpath(__file__)))
-GIT_STATUS = git.status()
+from os.path import dirname
+cat = sh.cat.bake(_cwd=dirname(dirname(dirname(os.path.realpath(__file__)))))
+GIT_STATUS = cat('.git/HEAD')
 PYTHON_VERSION = sys.version
 SETTINGS_EXPORT = ['PYTHON_VERSION', 'GIT_STATUS']
 SETTINGS_EXPORT_VARIABLE_NAME = 'mysettings'
