@@ -143,10 +143,20 @@ TEMPLATES = [
                 'molo.core.context_processors.locale',
                 'iogt.processors.compress_settings',
                 'iogt.processors.external_link',
+                'django_settings_export.settings_export',
             ],
         },
     },
 ]
+
+
+import os, sh, sys
+git = sh.git.bake(_cwd=os.path.dirname(os.path.realpath(__file__)))
+GIT_STATUS = git.status()
+PYTHON_VERSION = sys.version
+SETTINGS_EXPORT = ['PYTHON_VERSION', 'GIT_STATUS']
+SETTINGS_EXPORT_VARIABLE_NAME = 'mysettings'
+
 
 ROOT_URLCONF = 'iogt.urls'
 WSGI_APPLICATION = 'iogt.wsgi.application'
