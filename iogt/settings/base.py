@@ -94,7 +94,9 @@ INSTALLED_APPS = [
     'djcelery',
     'django_cas_ng',
     'compressor',
-    'storages'
+    'storages',
+
+    'dbbackup_ui.wagtail',
 ]
 
 COMMENTS_APP = 'molo.commenting'
@@ -143,10 +145,16 @@ TEMPLATES = [
                 'molo.core.context_processors.locale',
                 'iogt.processors.compress_settings',
                 'iogt.processors.external_link',
+                'django_settings_export.settings_export',
             ],
         },
     },
 ]
+
+import sys
+PYTHON_VERSION = sys.version
+SETTINGS_EXPORT = ['PYTHON_VERSION']
+SETTINGS_EXPORT_VARIABLE_NAME = 'mysettings'
 
 ROOT_URLCONF = 'iogt.urls'
 WSGI_APPLICATION = 'iogt.wsgi.application'

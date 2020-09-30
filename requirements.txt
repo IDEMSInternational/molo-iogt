@@ -22,3 +22,5 @@ responses
 python-cas==1.2.0
 markdown>=3.0.1
 redis==2.10.6
+django-settings-export
+django-dbbackup-ui
