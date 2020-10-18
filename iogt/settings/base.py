@@ -11,9 +11,12 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 
 from os.path import abspath, dirname, join
 from os import environ
+
 import django.conf.locale
 from django.conf import global_settings
 from django.utils.translation import ugettext_lazy as _
+import sentry_sdk
+from sentry_sdk.integrations.django import DjangoIntegration
 import dj_database_url
 import djcelery
 from celery.schedules import crontab
@@ -21,6 +24,11 @@ djcelery.setup_loader()
 # Absolute filesystem path to the Django project directory:
 PROJECT_ROOT = dirname(dirname(dirname(abspath(__file__))))
 
+
+sentry_sdk.init(
+    dsn= environ.get('SENTRY_DSN', ''),
+    integrations=[DjangoIntegration()]
+)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.7/howto/deployment/checklist/
